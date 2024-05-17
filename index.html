@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<!--THIS ONE WORKS IN VR WITH FPS MOVEMENT-->
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>2ndroom_GLB_test</title>
+    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+    <script src="https://rawgit.com/mayognaise/aframe-gif-shader/master/dist/aframe-gif-shader.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.0.0/dist/aframe-extras.min.js"></script>
+
+</head>
+
+
+
+<body>
+
+<a-assets>
+    <a-asset-item id="#2ndroom" src="assets/scene2_github_test.glb"></a-asset-item>
+
+
+<!--REMEMBER CROSSORIGIN. ALL THAT FCKING ABOUT. JEEZ-->
+
+      <img id="greysky" crossorigin="anonymous" src="assets/greysky.png">
+
+</a-assets> 
+
+    <a-scene>
+      
+        <a-sky id="background-img" src="#greysky"></a-sky>
+ 
+    
+
+<!--Basic Camerig for WASD and sticks on quest-->
+<a-entity id="rig"
+          movement-controls="controls: gamepad,keyboard,nipple"
+          nipple-controls="mode: static">
+  <a-entity camera
+            position="0 1.8d 0"
+            look-controls="pointerLockEnabled: true"
+            wasd-controls="acceleration: 35">
+  </a-entity>
+</a-entity>
+
+
+<!--the following lines of code decide wheter an entity recieves shading from real time lights. too many, slows performance-->
+
+<a-entity shadow="cast:false" gltf-model="#2ndroom" scale="1 1 1" position="0 0 0"></a-entity>
+
+
+
+
+
+
+
+<!--this is for positional audio-->
+<!-- <a-entity position="0 0 -5" scale="1 1 1" sound="src: assets/wind.mp3; autoplay: true; loop: true"></a-entity> -->
+   
+ 
+      <!-- nav-mesh: protecting us from running thru things  -->
+      <!-- <a-entity id="navmesh-Hello" gltf-model="assets/gltf/AdvHelloWorldnavmesh.gltf" visible="false" nav-mesh=""></a-entity> -->
+<!-- Basic movement and teleportation  -->
+<!-- <a-entity id="cameraRig" movement-controls="constrainToNavMesh: true; movementEnabled: true;" navigator="cameraRig: #cameraRig; cameraHead: #head; collisionEntities: .collision; ignoreEntities: .clickable" position="0 0 0" rotation="0 0 0"> -->
+    <!-- camera -->
+    <!-- <a-entity id="head" camera="active: true" position="0 1.6 0" look-controls="pointerLockEnabled: true; reverseMouseDrag: true" ></a-entity> -->
+          <!-- Left Controller -->
+          <!-- <a-entity id="leftHand" hand-controls="hand: left; handModelStyle: lowPoly; color: #15ACCF" teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head; button: trigger; curveShootingSpeed: 18; landingMaxAngle: 60" visible="true"></a-entity> -->
+          <!-- Right Controller -->
+          <!-- <a-entity id="rightHand" hand-controls="hand: right; handModelStyle: lowPoly; color: #15ACCF" laser-controls raycaster="showLine: true; far: 10; interval: 0; objects: .clickable, a-link;" line="color: #7cfc00; opacity: 0.5" visible="true"></a-entity> 
+  </a-entity> -->
+
+  <!--custom light | Ambient-->
+     <a-entity light="type:ambient;
+                      intensity: 0.9;">
+     </a-entity>
+  <!--custom light | point-->
+     <a-entity light="type:point;
+                      intensity:5;
+                      distance:10;
+                      castShadow:true;"
+                      color="#FFA500"
+                      position="0 6.472 -4.699">
+</a-entity>
+</a-scene>
+
+
+</body>
+</html>
